@@ -16,7 +16,7 @@ pipeline {
 
         }
 
-        stage("Code Quality scan){
+        stage("Code Quality scan"){
             steps {
                 echo "code is scanning"
             }
