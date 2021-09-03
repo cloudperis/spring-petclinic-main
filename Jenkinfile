@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("SCM"){
             steps {
-                sh "git https://github.com/cloudperis/spring-petclinic-main.git"
+                sh "git clone https://github.com/cloudperis/spring-petclinic-main.git"
             }
 
         }
