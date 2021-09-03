@@ -2,34 +2,32 @@ pipeline {
     agent any
 
     stages {
-        stage ("git") {
+        stage("SCM"){
             steps {
                 sh 'git https://github.com/cloudperis/spring-petclinic-main'
-
             }
-            
-            stage ("Build") {
-                steps {
-                    echo "Build the code"
 
-                }
-
-                stage ("Code Quality Scan") {
-                    steps {
-                        echo "Code is scanning"
-
-                    }
-
-                    stage ("Deploy") {
-                        steps {
-                            echo "deploy to Env"
-
-                        }
-                    }
-                }
-            }
-            
         }
 
+        stage("Build"){
+            steps {
+                echo "build the code"
+            }
+
+        }
+
+        stage("Code Quality scan){
+            steps {
+                echo "code is scanning"
+            }
+
+        }
+
+        stage("Deploy"){
+            steps {
+                echo "deploy to DEV"
+            }
+
+        }
     }
 }
