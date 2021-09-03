@@ -2,25 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage ('Checkout') {
+        stage('Checkout') {
             steps {
                 sh 'git https://github.com/cloudperis/spring-petclinic-main.git'
 
             }
             
-            stage ('Build') {
+            stage('Build') {
                 steps {
                     echo "Build the code"
 
                 }
 
-                stage ('Code Quality Scan') {
+                stage('Code Quality Scan') {
                     steps {
                         echo "Code is scanning"
 
                     }
 
-                    stage ('Deploy') {
+                    stage('Deploy') {
                         steps {
                             echo "deploy to Env"
 
