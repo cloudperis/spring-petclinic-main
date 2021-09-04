@@ -22,9 +22,9 @@ stage("test"){
     }
 }
 
-stage("deploy my app"){
+stage("deploy"){
     steps{
-        ls "echo"
+      echo "deploying my application in process"
     }
 }
 }
