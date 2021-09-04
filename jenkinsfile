@@ -2,17 +2,17 @@
 pipeline {
     agent any
     stages {
-        stage('Source') {
+        stage('Source') steps {
             //cloning my repository
             sh "git clone https://github.com/cloudperis/spring-petclinic-main.git"
         }
-        stage ('Build') {
+        stage ('Build') steps {
             echo "building our code ...."
         }
-        stage ('Test'){
+        stage ('Test') steps {
             echo "testing ...."
         }
-        stage ('Deploy'){
+        stage ('Deploy') steps {
             echo "Deploying the code....."
         }
     }
