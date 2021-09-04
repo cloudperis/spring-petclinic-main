@@ -8,7 +8,7 @@ stages{
              sh "https://github.com/cloudperis/spring-petclinic-main.git"
 
         }
-    }ls
+    }
 
     stage("build"){
 
