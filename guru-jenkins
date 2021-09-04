@@ -2,13 +2,14 @@ pipeline{
 agent any
 
 stages{
+    stage("source"){
+        steps{
 
-stage("source"){
-    steps{
-        // cloned github url repositroy
-        sh "https://github.com/cloudperis/spring-petclinic-main.git"
+            sh "https://github.com/cloudperis/spring-petclinic-main.git"
+
+        }
     }
-}
+
 
 stage("build"){
     steps{
