@@ -2,28 +2,26 @@ pipeline{
 agent any
 
 stages{
-    stage("source"){
+    stage('source'){
         steps{
 
             sh "https://github.com/cloudperis/spring-petclinic-main.git"
 
         }
     }
-
-
-stage("build"){
+stage('build'){
     steps{
-        echo "ls"
+        echo "building app in progress"
     }
 }
 
-stage("test"){
+stage('test'){
     steps{
-        echo "ls"
+        echo "testing my app loading"
     }
 }
 
-stage("deploy"){
+stage('deploy'){
     steps{
       echo "deploying my application in process"
     }
