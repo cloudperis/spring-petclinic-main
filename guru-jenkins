@@ -5,7 +5,7 @@ stages{
     stage('source'){
         steps{
 
-            sh "https://github.com/cloudperis/spring-petclinic-main.git"
+            sh "git clone https://github.com/cloudperis/spring-petclinic-main.git"
 
         }
     }
