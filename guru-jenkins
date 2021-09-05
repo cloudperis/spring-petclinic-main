@@ -11,7 +11,7 @@ stages{
     }
 stage('build'){
     steps{
-        echo "building app in progress"
+        sh "ls"
     }
 }
 
