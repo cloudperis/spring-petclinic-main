@@ -11,15 +11,24 @@ stages{
     }
 
     stage("build"){
-
+        step{
+            echo "buiding in process..."
+        }
+ 
     }
 
 
     stage("test"){
+       step{
+            echo "testing in process..."
+       }
 
     }
 
     stage("deploy"){
+        step{
+            echo "Deployng...."
+        }
 
 
     }
