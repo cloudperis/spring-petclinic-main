@@ -29,7 +29,7 @@ steps{
 
   stage("Archive"){
     steps{
-      archiveArtifacts "targert/*.jar"
+      archiveArtifacts "target/*.jar"
     }
   }
 
@@ -41,7 +41,7 @@ stage("Publish Artifacts"){
 
   stage("Deploy"){
 steps{
-    echo "deploying application in process......."
+    echo "deploying application in process........."
 }
   } 
 }
