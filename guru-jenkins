@@ -1,5 +1,8 @@
 pipeline{
-agent any
+
+tools {
+    maven "mvn"
+}
 
 stages{
     stage('source'){
@@ -11,13 +14,25 @@ stages{
     }
 stage('build'){
     steps{
-        sh "ls"
+        sh "mvn package"
     }
 }
 
 stage('test'){
     steps{
-        echo "testing my app loading"
+        junit "**target/surefire-reports/TEST-*.xml"
+    }
+}
+
+stage("Archive"){
+    steps{
+        archiveArtifacts "target/*.jar"
+    }
+}
+
+stage("Publish Artifacts"){
+    steps{
+
     }
 }
 
