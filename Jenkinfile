@@ -1,33 +1,41 @@
-pipeline {
+ipeline {
     agent any
+    
+    tools {
+        maven 'mvn'
+        
+    }
+
+
 
     stages {
-        stage("SCM"){
-            steps {
-                sh "git clone https://github.com/cloudperis/spring-petclinic-main.git"
+        
+        stage('Build') {
+            steps{
+                sh "mvn package"
+
             }
 
         }
 
-        stage("Build"){
+            
+        stage('Test') {
             steps {
-                echo "build the code"
+               junit '**/target/surefire-reports/TEST-*.xml' 
             }
-
         }
 
-        stage("Code Quality scan"){
+        stage('Archive') {
             steps {
-                echo "code is scanning"
+                archiveArtifacts 'target/*.jar'
             }
-
         }
 
-        stage("Deploy"){
-            steps {
-                echo "deploy to DEV"
+        stage('Publish-Artifact'){
+            steps{
+                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'bucket4petclinic', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-iso-east-1', showDirectlyInBrowser: false, sourceFile: 'target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'pet_jenkins', userMetadata: []
             }
-
         }
+       
     }
 }
