@@ -12,14 +12,14 @@ stages{
 
  stage("Build"){
 steps{
-     echo "building application process"
+     echo "building application process....."
 }
  }
 
 
   stage("test"){
       steps{
-           echo "testing application in process"
+           echo "testing application in process...."
       }
      
   } 
@@ -27,7 +27,7 @@ steps{
 
   stage("deploy"){
 steps{
-    echo "deploying application in process"
+    echo "deploying application in process......."
 }
   } 
 }
