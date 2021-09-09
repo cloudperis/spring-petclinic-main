@@ -1,9 +1,13 @@
  pipeline {
 agent any
 
+tools {
+  maven "mvn"
+
+}
 stages{
 
-   stage("source"){
+   stage("Source"){
            steps{
           git "https://github.com/cloudperis/spring-petclinic-main.git"
            }
@@ -12,20 +16,30 @@ stages{
 
  stage("Build"){
 steps{
-     echo "building application process....."
+     sh "mvn package"
 }
  }
 
-
-  stage("test"){
+  stage("Test"){
       steps{
-           echo "testing application in process...."
+           junit "**/target/surefire-reports/TEST-*.xml"
       }
      
   } 
 
+  stage("Archive"){
+    steps{
+      archiveArtifacts "targert/*.jar"
+    }
+  }
 
-  stage("deploy"){
+stage("Publish Artifacts"){
+  steps{
+  s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'guru-pet-clinic', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: 'targert/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'olulegend-jenkinss', userMetadata: []
+  }
+}
+
+  stage("Deploy"){
 steps{
     echo "deploying application in process......."
 }
