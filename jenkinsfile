@@ -1,34 +1,37 @@
-pipeline {
-    agent any
+ pipeline {
+agent any
 
-    stages {
-        stage("git"){
-            steps {
-                sh "git clone https://github.com/cloudperis/spring-petclinic-main.git"
-            }
+stages{
 
-
-        }
-        stage("Build"){
-            steps{
-                sh "ls"
-            }
+   stage("source"){
+           steps{
+               sh "git clone https://github.com/cloudperis/spring-petclinic-main.git"
+           }
+ }
 
 
-        }
-        stage("Test"){
-            steps {
-                echo "Testing...."
-            }
+ stage("Build"){
+steps{
+     echo "building application process"
+}
+ }
 
 
-        }
-        stage("Deploy"){
-            steps {
-                echo "Deploying...."
-            }
-        }
+  stage("test"){
+      steps{
+           echo "testing application in process"
+      }
+     
+  } 
 
 
-    }
+  stage("deploy"){
+steps{
+    echo "deploying application in process"
+}
+  } 
+}
+
+
+
 }
