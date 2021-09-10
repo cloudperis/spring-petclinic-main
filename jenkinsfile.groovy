@@ -1,31 +1,22 @@
 pipeline {
     agent any
-    
+
     tools {
         maven 'mvn'
         
     }
-
-
-
+    
     stages {
-        
         stage('Build') {
-            steps{
-                slackSend channel: 'jenkins-notifications', message: "STARTED ${env.JOB_NAME} at ${BUILD_TIMESTAMP}"
+            steps {
                 sh "mvn package"
-
             }
-
         }
-
-            
         stage('Test') {
             steps {
-               junit '**/target/surefire-reports/TEST-*.xml' 
+                junit '**/target/surefire-reports/TEST-*.xml'
             }
         }
-
         stage('Archive') {
             steps {
                 archiveArtifacts 'target/*.jar'
