@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("git"){
+            steps {
+                sh "git clone https://github.com/cloudperis/spring-petclinic-main.git"
+            }
+
+
+        }
+        stage("Build"){
+            steps {
+                sh "ls"
+            }
+
+
+        }
+        stage("Test"){
+            steps {
+                echo "Testing...."
+            }
+
+
+        }
+        stage("Deploy"){
+            steps {
+                echo "Deploying...."
+            }
+        }
+
+
+    }
+}
