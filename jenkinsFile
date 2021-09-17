@@ -42,20 +42,22 @@ stage("Publish Artifacts"){
   
   
   stage("Deploy"){
+
 steps{
+   
     echo "deploying application in process..............."
-     withCredentials([[
+       withCredentials([[
       $class: 'AmazonWebServicesCredentialsBinding'
       credentialsId: "olulegend-jenkinss", 
       accessKeyVariable: 'AWS_ACCESS_KEY_ID',
       secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
-        sh 'aws ec2 reboot-instances --instance-ids ${params.jenkinServer} --region ca-central-1'
+        sh 'aws ec2 reboot-instances --instance-ids ${params.jenkin-server} --region ca-central-1'
       }
 }
   } 
 }
 
-
-
 }
+
+
