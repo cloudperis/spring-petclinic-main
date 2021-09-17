@@ -69,7 +69,7 @@ pipeline {
                 echo 'deploying application updates....'
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: "Sanmi-AWS Ccredentials",
+                    credentialsId: "Sanmi-AWS Credentials",
                     accesskeyVariable: 'AWS_ACESS_KEY_ID',
                     secretkeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
