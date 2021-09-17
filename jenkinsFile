@@ -47,7 +47,7 @@ steps{
      withCredentials([[
       $class: "AmazonwebServicesCredentialsBinding",
       credentialsId: "olulegend-jenkinss",
-      accessKeyVariable: "aws_access_key_id",
+      accessKeyVariable: "AWS_ACCESS_KEY_ID",
       secretKeyVariable: "AWS_SECRET_ACCESS_KEY"]]) {
 
         sh "aws ec2 reboot-instances --instance-ids ${params.jenkinServer} --region ca-central-1"
