@@ -73,7 +73,7 @@ pipeline {
                     accesskeyVariable: 'AWS_ACESS_KEY_ID',
                     secretkeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
-                        sh "aws ec2 reboot-instances --instance-ids ${params.sevserver} --region us-east-2"
+                        sh "aws ec2 reboot-instances --instance-ids ${params.devserver} --region us-east-2"
                     }
                 
                 
