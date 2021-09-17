@@ -16,6 +16,7 @@ stages{
 
  stage("Build"){
 steps{
+   slackSend channel: 'olulegend-jenkinschannel', color: '#7fff00', message: 'Started ${env.JOB_Name} at #${env.BULD_NUMBER}:\n${env.BUILD_url}'
      sh "mvn package"
 }
  }
@@ -46,8 +47,8 @@ steps{
     withCredentials([[
       $class: "AmazonwebServicesCredentialsBinding",
       credentialsId: "olulegend-jenkinss",
-      accessKeyVariable: "aws_access_key_id",
-      secretKeyVariable: "AWS_SECRET_ACCESS_KEY"]]) {
+      accessKeyVariable: "AKIA6MBLBASOMLUP6BB2",
+      secretKeyVariable: "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"]]) {
 
         sh "aws ec2 reboot-instances --instance --ids ${params.jenkinServer} --region ca-central-1b"
       }
