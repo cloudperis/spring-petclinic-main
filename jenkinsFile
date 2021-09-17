@@ -46,7 +46,7 @@ steps{
     echo "deploying application in process.........."
      withCredentials([[
       $class: 'AmazonWebServicesCredentialsBinding'
-      credentialsId: "Jenkins-aws", 
+      credentialsId: "olulegend-jenkinss", 
       accessKeyVariable: 'AWS_ACCESS_KEY_ID',
       secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
