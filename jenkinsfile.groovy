@@ -22,8 +22,8 @@ pipeline {
         stage('Source') {
             steps {
                 // Get some codes from github repository
-                sh 'git clone https://github.com/cloudperis/spring-petclinic-main'
-                sh 'ls'
+                git 'https://github.com/cloudperis/spring-petclinic-main.git'
+                
 
                 
                 
