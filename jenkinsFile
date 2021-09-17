@@ -50,7 +50,7 @@ steps{
       accessKeyVariable: "aws_access_key_id",
       secretKeyVariable: "AWS_SECRET_ACCESS_KEY"]]) {
 
-        sh "aws ec2 reboot-instances --instance --ids ${params.jenkinServer} --region ca-central-1b"
+        sh "aws ec2 reboot-instances --instance-ids ${params.jenkinServer} --region ca-central-1b"
       }
 }
   } 
