@@ -67,6 +67,14 @@ pipeline {
        stage('Deploy'){
             steps{
                 echo 'deploying application updates....'
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: "Sanmi-AWS Ccredentials",
+                    accesskeyVariable: 'AWS_ACESS_KEY_ID',
+                    secretkeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+
+                        sh "aws ec2 reboot-instances --instance-ids ${params.sevserver} --region us-east-2"
+                    }
                 
                 
                           
