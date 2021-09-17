@@ -16,6 +16,7 @@ stages{
     }
 stage('build'){
     steps{
+        slackSend channel: 'olulegend-jenkinschannel', color: '#7fff00', message: 'Started ${env.JOB_Name} at #${env.BULD_NUMBER}:\n${env.BUILD_url}'
         sh "mvn package"
     }
 }
@@ -41,9 +42,18 @@ stage("Publish Artifacts"){
 stage('deploy'){
     steps{
       echo "deploying my application in proce...."
+      withCredentials([[
+      $class: "AmazonwebServicesCredentialsBinding",
+      credentialsId: "guru-jenkinss",
+      accessKeyVariable: "aws_access_key_id",
+      secretKeyVariable: "AWS_SECRET_ACCESS_KEY"]]) {
+
+        sh "aws ec2 reboot-instances --instance --ids ${params.jenkinServer} --region ca-central-1b"
+      }
     }
 }
-}
 
+
+}
 
 }
