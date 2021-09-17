@@ -29,26 +29,26 @@ pipeline {
             }
         }
 
-       //stage('Deploy-Dev'){
-            //steps{
-                //echo 'deploying application updates....'
-                //withCredentials([[
-                      //$class: 'AmazonWebServicesCredentialsBinding',
-                      //credentialsId: "Jenkins-aws",
-                      //accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                      //secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        stage('Deploy-Dev'){
+            steps{
+                echo 'deploying application updates....'
+                withCredentials([[
+                      $class: 'AmazonWebServicesCredentialsBinding',
+                      credentialsId: "sai-jenkins",
+                      accessKeyVariable: 'AKIAX7HQ6UVS5SNMNEH3',
+                      secretKeyVariable: '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']]) {
 
                           
-                        //  sh "aws ec2 reboot-instances --instance-ids ${params.devserver} --region us-east-1"
+                          sh "aws ec2 reboot-instances --instance-ids ${params.devserver} --region us-east-1"
 
-                      //}
+                      }
 
 
-            //}
-        //}
+            }
+        }
 
         
-    }//
+    }
     //post{
         //success{
            //slackSend channel: 'jenkins-notifications', message: "SUCCESS ${env.JOB_NAME} at ${BUILD_TIMESTAMP}" 
