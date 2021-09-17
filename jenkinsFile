@@ -43,7 +43,7 @@ stage("Publish Artifacts"){
   
   stage("Deploy"){
 steps{
-    echo "deploying application in process.........."
+    echo "deploying application in process..............."
      withCredentials([[
       $class: 'AmazonWebServicesCredentialsBinding'
       credentialsId: "olulegend-jenkinss", 
