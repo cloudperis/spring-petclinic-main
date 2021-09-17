@@ -54,9 +54,12 @@ steps{
 
         sh "aws ec2 reboot-instances --instance-ids ${params.jenkin-server} --region ca-central-1"
       }
-}
+ }
+
   } 
+
 }
+
 
 }
 
