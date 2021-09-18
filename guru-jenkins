@@ -41,14 +41,14 @@ stage("Publish Artifacts"){
 
 stage('deploy'){
     steps{
-      echo "deploying my application in proce...."
+      echo "deploying my application in process...."
       withCredentials([[
-      $class: "AmazonwebServicesCredentialsBinding",
+      $class: 'AmazonwebServicesCredentialsBinding',
       credentialsId: "guru-jenkinss",
-      accessKeyVariable: "aws_access_key_id",
-      secretKeyVariable: "AWS_SECRET_ACCESS_KEY"]]) {
+      accessKeyVariable: 'AWS_ACCESS_kKEY_ID',
+      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
-        sh "aws ec2 reboot-instances --instance --ids ${params.jenkinServer} --region ca-central-1b"
+        sh "aws ec2 reboot-instances --instance-ids ${params.devServer} --region ca-central-1"
       }
     }
 }
