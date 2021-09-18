@@ -41,7 +41,7 @@ stage("Publish Artifacts"){
 
 stage('deploy'){
     steps{
-      echo "deploying my application in process...."
+      echo "deploying my application in process........"
       withCredentials([[
       $class: 'AmazonwebServicesCredentialsBinding',
       credentialsId: "guru-jenkinss",
