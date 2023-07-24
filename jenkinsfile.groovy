@@ -12,7 +12,7 @@ pipeline {
         
         stage('Build') {
             steps{
-                slackSend channel: 'jenkins-notifications', color: '#2211d9', message: "STARTED ${env.JOB_NAME} at #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
+                slackSend channel: 'jenkins-notifications', color: '#2211d9', message: "STARTED BUILDING ${env.JOB_NAME} at #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
                 sh "mvn package"
 
             }
