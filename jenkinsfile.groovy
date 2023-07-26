@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-       stage('Deploy-Dev'){
+       stage('Deploy-Dev1'){
             steps{
                 echo 'deploying application updates....'
                 withCredentials([[
