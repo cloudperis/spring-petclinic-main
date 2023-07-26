@@ -48,7 +48,7 @@ pipeline {
                       secretKeyVariable: 'UJ5TSXNsP+nXuwKg/G1X08398OSsnri+HGBA4F+Y']]) {
 
                           
-                          sh "aws ec2 reboot-instances --instance-ids ${params.devserver} --region us-east-1"
+                          sh "aws ec2 reboot-instances --instance-ids i-09759a80862886d80 --region us-east-1"
 
                       }
 
