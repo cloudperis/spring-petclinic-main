@@ -44,10 +44,10 @@ pipeline {
                 withCredentials([[
                       $class: 'AmazonWebServicesCredentialsBinding',
                       credentialsId: "jenkinss3",
-                      accessKeyVariable: 'AKIA6MBLBASOM7TGMMWR',
-                      secretKeyVariable: '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']]) {
+                      accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
 
-                          
+
                           sh "aws ec2 reboot-instances --instance-ids i-09759a80862886d80 --region us-east-2"
 
                       }
