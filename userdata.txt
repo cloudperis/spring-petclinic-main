@@ -19,7 +19,7 @@ Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
 # install updates
-BUCKET=app-seun-pet-clinic
+BUCKET=olulegends3
 yum update -y
 
 sudo amazon-linux-extras install java-openjdk11
@@ -29,7 +29,7 @@ cd ~
 rm ~/*
 
 OBJECT="$(aws s3 ls $BUCKET --recursive | sort | tail -n 1 | awk '{print $4}')"
-aws s3 cp s3://$BUCKET/$OBJECT . --region=us-east-1
+aws s3 cp s3://$BUCKET/$OBJECT . --region=us-east-2
 app="$(ls)"
 
 java -jar $app

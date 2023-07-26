@@ -48,7 +48,7 @@ pipeline {
                       secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){ 
 
 
-                          sh "aws ec2 reboot-instances --instance-ids i-09759a80862886d80 --region us-east-2"
+                          sh "aws ec2 reboot-instances --instance-ids i-0d6d5625a149616f8 --region us-east-2"
 
                       }
 
