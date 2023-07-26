@@ -43,9 +43,9 @@ pipeline {
                 echo 'deploying application updates....'
                 withCredentials([[
                       $class: 'AmazonWebServicesCredentialsBinding',
-                      credentialsId: "Jenkins-aws",
-                      accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                      credentialsId: "jenkinss3",
+                      accessKeyVariable: 'AKIA6MBLBASOM7TGMMWR',
+                      secretKeyVariable: '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']]) {
 
                           
                           sh "aws ec2 reboot-instances --instance-ids ${params.devserver} --region us-east-1"
