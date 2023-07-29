@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        maven 'mvn' //configure jenkins tools with maven
+        maven 'mvn' //configure jenkins tools with maven//
         
     }
 
@@ -13,7 +13,7 @@ pipeline {
         stage('Build 41') {
             steps{
                 slackSend channel: 'jenkins', color: '#2211d9', message: "STARTED ${env.JOB_NAME} at #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
-                sh "mvn package"  //integrate slack with jenkins
+                sh "mvn package"  //integrate slack with jenkins//
 
             }
 
