@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        maven 'mvn' //configure jenkins tools with maven//
+        maven 'mvn'   // configure tools in jenkins//
         
     }
 
@@ -10,10 +10,10 @@ pipeline {
 
     stages {
         
-        stage('Build 41') {
+        stage('Build') {
             steps{
-                slackSend channel: 'jenkins', color: '#2211d9', message: "STARTED ${env.JOB_NAME} at #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
-                sh "mvn package"  //integrate slack with jenkins//
+                slackSend channel: 'jenkins-notifications', color: '#2211d9', message: "STARTED ${env.JOB_NAME} at #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
+                sh "mvn package"   //integrate jenkins with slack to get messages//
 
             }
 
@@ -34,7 +34,7 @@ pipeline {
 
         stage('Publish-Artifact'){
             steps{
-                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'olulegends3', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-east-2', showDirectlyInBrowser: false, sourceFile: 'target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'jenkinss3', userMetadata: []
+                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'app-seun-pet-clinic', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: 'target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'Jenkins', userMetadata: []
             }
         }
 
@@ -43,12 +43,12 @@ pipeline {
                 echo 'deploying application updates....'
                 withCredentials([[
                       $class: 'AmazonWebServicesCredentialsBinding',
-                      credentialsId: "jenkinss3",
-                      accessKeyVariable: 'AKIA6MBLBASOM7TGMMWR',
-                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
+                      credentialsId: "Jenkins-aws",
+                      accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
                           
-                          sh "aws ec2 reboot-instances --instance-ids i-0e1862772a5afb538 ${params.devserver} --region us-east-2"
+                          sh "aws ec2 reboot-instances --instance-ids ${params.devserver} --region us-east-1"
 
                       }
 
@@ -60,10 +60,10 @@ pipeline {
     }
     post{
         success{
-           slackSend channel: 'jenkins', color: '439FE0', message: "SUCCESS ${currentBuild.fullDisplayName} at ${currentBuild.durationString[0..-13]}" 
+           slackSend channel: 'jenkins-notifications', color: '439FE0', message: "SUCCESS ${currentBuild.fullDisplayName} at ${currentBuild.durationString[0..-13]}" 
         }
         failure{
-            slackSend channel: 'jenkins', color: '#fc0303', message: "FAILURE ${currentBuild.fullDisplayName} at ${currentBuild.durationString[0..-13]}"
+            slackSend channel: 'jenkins-notifications', color: '#fc0303', message: "FAILURE ${currentBuild.fullDisplayName} at ${currentBuild.durationString[0..-13]}"
         }
     }
 }
