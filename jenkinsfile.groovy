@@ -1,7 +1,7 @@
 pipeline {
     agent any
     
-    tools {
+    tools1 {
         maven 'mvn'
         
     }
