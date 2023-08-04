@@ -33,9 +33,9 @@ pipeline {
             }
         }
 
-        stage('Publish-Artifact'){
+         stage('Publish-Artifact'){
             steps{
-                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'olulegends3', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-east-2', showDirectlyInBrowser: false, sourceFile: 'target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: "jenkinss3", userMetadata: []
+                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'olulegends3', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-east-2', showDirectlyInBrowser: false, sourceFile: 'target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'jenkinss3', userMetadata: []
             }
         }
 
@@ -44,12 +44,12 @@ pipeline {
                 echo 'deploying application updates....'
                 withCredentials([[
                       $class: 'AmazonWebServicesCredentialsBinding',
-                      credentialsId: "jenkinss3",
+                      credentialsId: "jenkins-ec2-deploy",
                       accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                       secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
                           
-                          sh "aws ec2 reboot-instances --instance-ids i-0e1862772a5afb538 --region us-east-2"
+                         sh "aws ec2 reboot-instances --instance-ids i-0e1862772a5afb538 --region us-east-2"
 
                       }
 
