@@ -12,7 +12,7 @@ pipeline {
         
         stage('Build') {
             steps{
-                slackSend channel: 'cosmas-team', color: '#2211d9', message: "STARTED ${env.JOB_NAME} at #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
+                slackSend channel: 'jenkins', color: '#2211d9', message: "STARTED ${env.JOB_NAME} at #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
                 sh "mvn package"
 
             }
@@ -35,7 +35,7 @@ pipeline {
 
         stage('Publish-Artifact'){
             steps{
-                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'jenkinsproject', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: 'target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'jenkins-s3upload', userMetadata: []
+                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'olulegends3', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-east-2', showDirectlyInBrowser: false, sourceFile: 'target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'jenkinss3', userMetadata: []
             }
         }
 
@@ -44,12 +44,12 @@ pipeline {
                 echo 'deploying application updates....'
                 withCredentials([[
                       $class: 'AmazonWebServicesCredentialsBinding',
-                      credentialsId: "jenkins-ec2-deploy",
+                      credentialsId: "jenkinss3",
                       accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                       secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
                           
-                          sh "aws ec2 reboot-instances --instance-ids i-0e91826fddbd1ec14 --region us-east-1"
+                          sh "aws ec2 reboot-instances --instance-ids i-0e1862772a5afb538 --region us-east-2"
 
                       }
 
@@ -61,10 +61,10 @@ pipeline {
     }
     post{
         success{
-           slackSend channel: 'cosmas-team', color: '439FE0', message: "SUCCESS ${currentBuild.fullDisplayName} at ${currentBuild.durationString[0..-13]}" 
+           slackSend channel: 'jenkins', color: '439FE0', message: "SUCCESS ${currentBuild.fullDisplayName} at ${currentBuild.durationString[0..-13]}" 
         }
         failure{
-            slackSend channel: 'cosmas-team', color: '#fc0303', message: "FAILURE ${currentBuild.fullDisplayName} at ${currentBuild.durationString[0..-13]}"
+            slackSend channel: 'jenkins', color: '#fc0303', message: "FAILURE ${currentBuild.fullDisplayName} at ${currentBuild.durationString[0..-13]}"
         }
     }
 }
