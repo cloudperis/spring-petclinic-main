@@ -34,7 +34,7 @@ pipeline {
 
         stage('Publish-Artifact'){
             steps{
-                s3Upload acl: 'Private', bucket: 'app-seun-pet-clinic', cacheControl: '', excludePathPattern: '', file: 'target/*.jar', includePathPattern: '', metadatas: [''], redirectLocation: '', sseAlgorithm: '', tags: '', text: '', workingDir: ''
+                s3Upload acl: 'Private', bucket: 'app-seun-pet-clinic', cacheControl: '', excludePathPattern: '', file: 'target/*.jar', metadatas: [''], redirectLocation: '', sseAlgorithm: '', tags: '', text: '', workingDir: ''
             }
         }
 
